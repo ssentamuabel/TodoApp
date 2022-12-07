@@ -22,18 +22,20 @@ public class Main {
                 Items item = new Items();
                 TodoServicesImp TodoService = new TodoServicesImp();
 
-                System.out.println("*******ITEMS*******************");
-
-                display(TodoService);
-
                 System.out.println();
+                System.out.println("1. Display Items");
                 System.out.println("2. Add item");
                 System.out.println("3. Delete Item");
                 System.out.println("4. Mark Item done");
                 System.out.println("Else to quit.");
                 System.out.print("Select action: ");
                 int opt = scanner.nextInt();
-                if(opt == 2) {
+                if(opt == 1 ) {
+
+                    System.out.println("*******ITEMS*******************");
+                    display(TodoService);
+
+                }else if(opt == 2) {
                     System.out.print("Enter the id:");
                     int id = scanner.nextInt();
                     scanner.nextLine();
