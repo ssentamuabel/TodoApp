@@ -9,6 +9,7 @@
         <module name="todo" />
         <module name="TodoApp1" />
         <module name="Todo" />
+        <module name="TodoApp" />
       </profile>
     </annotationProcessing>
   </component>

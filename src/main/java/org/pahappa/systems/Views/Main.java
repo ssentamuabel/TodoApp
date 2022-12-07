@@ -1,8 +1,8 @@
-package org.example.Views;
+package org.pahappa.systems.Views;
 
-import org.example.Services.TodoServicesImp;
+import org.pahappa.systems.Services.TodoServicesImp;
 
-import org.example.Model.Items;
+import org.pahappa.systems.Model.Items;
 
 import java.util.Scanner;
 

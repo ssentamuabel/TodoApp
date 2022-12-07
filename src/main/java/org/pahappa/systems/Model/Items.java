@@ -1,5 +1,8 @@
-package org.example.Model;
+package org.pahappa.systems.Model;
 
+/**
+ * this is the model for the values.
+ */
 public class Items {
     private int id;
     private String item;
