@@ -4,16 +4,24 @@ import org.pahappa.systems.Model.Items;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Implements the TodoServices
- */
+
+
+
+
+
 public class TodoServicesImp implements TodoServices {
+
+/**
+ * Implements the todoServices
+ */
+
+    
     @Override
     public void addItem(Items item) {
 
-        /**
-         * Adding items in the database
-         */
+    
+    //  Adding items in the database
+        
         String query = "INSERT INTO todo(idtodo, item, status) values('" + item.getId() + "','" +
                 item.getItem() + "','" + item.getStatus() + "')";
 
@@ -26,10 +34,8 @@ public class TodoServicesImp implements TodoServices {
         }
     }
 
-    /**
-     * This is to delete an item from database
-     * @param id
-     */
+//  This is to delete an item from database
+    
     @Override
     public void deleteItem( int id){
         String query = "DELETE FROM todo WHERE idtodo ='" +id+"' ";
@@ -63,6 +69,9 @@ public class TodoServicesImp implements TodoServices {
     @Override
     public void showItems(){
 
+        
+    
+
         String query = "SELECT * FROM todo";
 
         try {
@@ -77,6 +86,8 @@ public class TodoServicesImp implements TodoServices {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        
 
     }
 }
