@@ -2,7 +2,7 @@ package org.pahappa.systems.Views;
 
 import org.pahappa.systems.Services.TodoServicesImp;
 
-import org.pahappa.systems.Model.Items;
+import org.pahappa.systems.Models.Items;
 
 import java.util.Scanner;
 

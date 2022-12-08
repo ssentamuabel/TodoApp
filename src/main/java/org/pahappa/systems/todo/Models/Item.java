@@ -1,4 +1,4 @@
-package org.pahappa.systems.Model;
+package org.pahappa.systems.Models;
 
 /**
  * this is the model for the values.

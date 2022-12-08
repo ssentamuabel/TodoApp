@@ -1,5 +1,5 @@
 package org.pahappa.systems.Services;
-import org.pahappa.systems.Model.Items;
+import org.pahappa.systems.Models.Items;
 
 import java.sql.Statement;
 
