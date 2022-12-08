@@ -1,16 +1,14 @@
-package org.pahappa.systems.Services;
-import org.pahappa.systems.Models.Items;
+package org.pahappa.systems.todo.Services;
+import org.pahappa.systems.todo.Models.Item;
 
-import java.sql.Statement;
 
 
 
 
 interface TodoServices {
 
-    DatabaseManager db_connection = new DatabaseManager();
-    Statement statement = db_connection.db_connection();
-     void addItem(Items item);
+
+     void addItem(Item item);
     void deleteItem( int id);
     void markDone(int id);
     void showItems();

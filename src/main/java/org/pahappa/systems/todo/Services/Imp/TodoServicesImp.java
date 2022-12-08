@@ -1,7 +1,8 @@
-package org.pahappa.systems.todo.Services;
+package org.pahappa.systems.todo.Services.Imp;
 import org.pahappa.systems.todo.Models.Item;
 
 import org.hibernate.Session;
+import org.pahappa.systems.todo.Services.TodoServices;
 import org.pahappa.systems.todo.config.HibernateConfiguration;
 /**
  * Implements the TodoServices

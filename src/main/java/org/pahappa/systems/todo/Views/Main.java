@@ -1,8 +1,8 @@
-package org.pahappa.systems.Views;
+package org.pahappa.systems.todo.Views;
 
-import org.pahappa.systems.Services.TodoServicesImp;
+import org.pahappa.systems.todo.Services.Imp.TodoServicesImp;
 
-import org.pahappa.systems.Models.Items;
+import org.pahappa.systems.todo.Models.Item;
 
 import java.util.Scanner;
 
@@ -14,12 +14,12 @@ public class Main {
 
         System.out.println("Welcome to the Todo Application.");
         System.out.print("Press 2 to continue: ");
-        int choice = scanner.nextInt();
-        if(choice == 2){
+        String choice = scanner.nextLine();
+        if(choice.equals("2")){
             cont = true;
             while(cont){
 
-                Items item = new Items();
+                Item item = new Item();
                 TodoServicesImp TodoService = new TodoServicesImp();
 
                 System.out.println();
@@ -29,35 +29,33 @@ public class Main {
                 System.out.println("4. Mark Item done");
                 System.out.println("Else to quit.");
                 System.out.print("Select action: ");
-                int opt = scanner.nextInt();
-                if(opt == 1 ) {
+                String opt = scanner.nextLine();
+                if(opt.equals("1") ) {
+//
+//                    System.out.println("*******ITEMS*******************");
+//                    display(TodoService);
 
-                    System.out.println("*******ITEMS*******************");
-                    display(TodoService);
-
-                }else if(opt == 2) {
-                    System.out.print("Enter the id:");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
+                }else if(opt.equals("2")) {
                     System.out.println("Enter Todo Item.");
+
                     String activity = scanner.nextLine();
                     boolean status = false;
 
                     // create an item object
 
-                    item.setId(id);
+//                    item.setId(id);
                     item.setItem(activity);
                     item.setStatus(status);
 
                     // save the new object to the list
                     addItem(item, TodoService);
 
-                }else if(opt == 3){
+                }else if(opt.equals("3")){
 
                     System.out.print("Enter the Id of the item: ");
                     int id = scanner.nextInt();
                     deleteItem(TodoService, id);
-                }else if (opt == 4){
+                }else if (opt == "4"){
                     System.out.print("Enter the id of item: ");
                     int id = scanner.nextInt();
                     verify(TodoService, id);
@@ -83,7 +81,7 @@ public class Main {
         TodoService.markDone(id);
     }
 
-    public static void addItem(Items item, TodoServicesImp TodoAdd){
+    public static void addItem(Item item, TodoServicesImp TodoAdd){
 
     TodoAdd.addItem(item);
     }

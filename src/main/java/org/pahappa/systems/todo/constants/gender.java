@@ -1,2 +1,5 @@
-package org.pahappa.systems.todo.constants;public class gender {
+package org.pahappa.systems.todo.constants;
+
+public enum gender {
+    MALE, FEMALE
 }
