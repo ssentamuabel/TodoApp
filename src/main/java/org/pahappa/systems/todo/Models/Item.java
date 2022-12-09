@@ -1,7 +1,9 @@
 package org.pahappa.systems.todo.Models;
-
+import org.pahappa.systems.todo.Models.User;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
+
+import java.util.Set;
 
 
 /**
@@ -11,8 +13,22 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="todos")
 public class Item {
     private String id;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private String item;
     private Boolean status ;
+
+    @OneToOne
+    @JoinColumn(name="id")
+    private User user;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="uuid")
     @GenericGenerator(name="uuid", strategy="uuid2")

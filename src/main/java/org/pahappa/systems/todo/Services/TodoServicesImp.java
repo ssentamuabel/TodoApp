@@ -1,9 +1,13 @@
-package org.pahappa.systems.todo.Services.Imp;
+package org.pahappa.systems.todo.Services;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.pahappa.systems.todo.Models.Item;
 
 import org.hibernate.Session;
-import org.pahappa.systems.todo.Services.TodoServices;
 import org.pahappa.systems.todo.config.HibernateConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Implements the TodoServices
  */
@@ -36,20 +40,39 @@ public class TodoServicesImp implements TodoServices {
      * @param id
      */
     @Override
-    public void deleteItem( int id){
+    public void deleteItem( String id){
 
 
 
     }
 
     @Override
-    public void markDone(int id){
+    public void markDone(String id){
 
     }
 
     @Override
-    public void showItems(){
+    public List<Item> showItems(String ownerId){
+
+        List<Item> items = new ArrayList<>();
+
+        try{
+            Session session = HibernateConfiguration.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            CriteriaQuery<Item> criteriaQuery = session.getCriteriaBuilder().createQuery(Item.class);
+            criteriaQuery.from(Item.class);
+
+            
 
 
+            session.getTransaction().commit();
+            session.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return items;
     }
 }

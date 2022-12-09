@@ -4,7 +4,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.*;
-import org.pahappa.systems.todo.constants.gender;
+import org.hibernate.annotations.GenericGenerator;
+import org.pahappa.systems.todo.constants.Gender;
+
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -12,7 +15,19 @@ public class User {
     private String id;
     private String name;
     private String email;
+
+    public Set<Item> getItems() {
+        return Items;
+    }
+
+    public void setItems(Set<Item> items) {
+        Items = items;
+    }
+
     private String password;
+
+    @OneToMany(mappedBy = "users", cascade= CascadeType.ALL)
+    private Set<Item> Items;
 
     public String getPassword() {
         return password;
@@ -22,11 +37,11 @@ public class User {
         this.password = password;
     }
 
-    private gender gender;
+    private Gender gender;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="id", nullable=false)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="uuid")
+    @GenericGenerator(name="uuid", strategy="uuid2")
     public String getId() {
         return id;
     }
@@ -51,11 +66,21 @@ public class User {
         this.email = email;
     }
 
-    public org.pahappa.systems.todo.constants.gender getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(org.pahappa.systems.todo.constants.gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                '}';
     }
 }

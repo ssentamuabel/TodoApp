@@ -1,15 +1,14 @@
 package org.pahappa.systems.todo.Services;
 import org.pahappa.systems.todo.Models.Item;
 
+import java.util.List;
 
 
-
-
-interface TodoServices {
+public interface TodoServices {
 
 
      void addItem(Item item);
-    void deleteItem( int id);
-    void markDone(int id);
-    void showItems();
+    void deleteItem( String id);
+    void markDone(String id);
+    List<Item> showItems(String ownerId);
 }

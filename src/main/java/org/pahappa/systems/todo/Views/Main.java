@@ -1,91 +1,110 @@
 package org.pahappa.systems.todo.Views;
 
-import org.pahappa.systems.todo.Services.Imp.TodoServicesImp;
+import org.pahappa.systems.todo.Services.*;
+import org.pahappa.systems.todo.Models.*;
+import org.pahappa.systems.todo.constants.Gender;
 
-import org.pahappa.systems.todo.Models.Item;
 
 import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Boolean cont = false;
 
-        System.out.println("Welcome to the Todo Application.");
-        System.out.print("Press 2 to continue: ");
-        String choice = scanner.nextLine();
-        if(choice.equals("2")){
-            cont = true;
-            while(cont){
+      UserServices userservices = new UserImp();
+      Scanner scanner = new Scanner(System.in);
+      TodoServices todoservices = new TodoServicesImp();
 
-                Item item = new Item();
-                TodoServicesImp TodoService = new TodoServicesImp();
+      System.out.println("***********************Welcome**To***Todo**Application********\n");
 
-                System.out.println();
-                System.out.println("1. Display Items");
-                System.out.println("2. Add item");
-                System.out.println("3. Delete Item");
-                System.out.println("4. Mark Item done");
-                System.out.println("Else to quit.");
-                System.out.print("Select action: ");
-                String opt = scanner.nextLine();
-                if(opt.equals("1") ) {
-//
-//                    System.out.println("*******ITEMS*******************");
-//                    display(TodoService);
+      System.out.println("1. SignUp");
+      System.out.println("2. Login");
 
-                }else if(opt.equals("2")) {
-                    System.out.println("Enter Todo Item.");
+      System.out.print("Select  an action: ");
+      switch(scanner.nextLine()){
 
-                    String activity = scanner.nextLine();
-                    boolean status = false;
-
-                    // create an item object
-
-//                    item.setId(id);
-                    item.setItem(activity);
-                    item.setStatus(status);
-
-                    // save the new object to the list
-                    addItem(item, TodoService);
-
-                }else if(opt.equals("3")){
-
-                    System.out.print("Enter the Id of the item: ");
-                    int id = scanner.nextInt();
-                    deleteItem(TodoService, id);
-                }else if (opt == "4"){
-                    System.out.print("Enter the id of item: ");
-                    int id = scanner.nextInt();
-                    verify(TodoService, id);
-
-                }else{
-                    break;
-                }
+          case "1":registerUser(userservices, scanner); break;
+          case "2":
+              User user = new User();
+              user = login(userservices, scanner);
+              System.out.println(user.getName() +" successfully logged in");
+              System.out.println("1. View tasks.");
+              System.out.println("2.Add task");
+              System.out.println("3.Confirm task");
+              System.out.println("4.Delete task");
+              System.out.println("Any other to logout\n");
+              System.out.print("Choice: ");
+              switch(scanner.nextLine()){
+                  case "1":
+                      System.out.println("You have selected 1"); break;
+                  case "2":
+                      addItem(user,todoservices, scanner ); break;
+                  case "3": System.out.println("You have selected 3"); break;
+                  case "4": System.out.println("You have selected 4"); break;
+                  default : System.out.println("The choice is not valid");
+              }
+              break;
+          default :System.out.println("The choice is not valid");
+      }
 
 
-            }
-        }else{
-            System.out.println("Thanks for using this applicataion.");
+
+    }
+
+    public static void registerUser(UserServices services, Scanner scan){
+        User user = new User();
+
+        System.out.print("Enter your name: ");
+        user.setName(scan.nextLine());
+
+        System.out.print("Enter your email: ");
+        user.setEmail(scan.nextLine());
+
+
+        System.out.print("Choose\n M for male \n F for female: ");
+        switch(scan.nextLine()){
+            case "m":user.setGender(Gender.MALE);break;
+            case "f":user.setGender(Gender.FEMALE); break;
+            default:System.out.println("Please make a valid option");
         }
 
+        System.out.print("Enter your password ");
+        user.setPassword(scan.nextLine());
 
+        services.register(user);
 
+    }
+    public static User login( UserServices service, Scanner scan){
+        System.out.println("Enter your email");
+        String email = scan.nextLine();
+
+        System.out.println("Enter your password ");
+        String password = scan.nextLine();
+
+      return  service.login(email, password) ;
     }
     public static void  display(TodoServicesImp TodoService ){
 
-        TodoService.showItems();
+
     }
-    public static void verify(TodoServicesImp TodoService, int id){
+    public static void verify(TodoServicesImp TodoService, String id){
         TodoService.markDone(id);
     }
 
-    public static void addItem(Item item, TodoServicesImp TodoAdd){
 
-    TodoAdd.addItem(item);
+    public static void addItem( User user, TodoServices TodoAdd, Scanner scan){
+        Item newItem = new Item();
+        System.out.println("Enter the Item");
+        newItem.setItem(scan.nextLine());
+
+        newItem.setUser(user);
+        newItem.setStatus(false);
+
+        TodoAdd.addItem(newItem);
+        System.out.println(user.getName()+", you have added an Item");
+
     }
-    public static  void deleteItem(TodoServicesImp TodoDelete, int id){
+    public static  void deleteItem(TodoServicesImp TodoDelete, String id){
 
     TodoDelete.deleteItem(id);
     }
